@@ -1,0 +1,19 @@
+{
+  "name": "angular-common",
+  "version": "1.0.0",
+  "description": "Common functionalities shared across angular projects.",
+  "main": "angular-common.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LIVEauctioneers/angular-common.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LIVEauctioneers/angular-common/issues"
+  },
+  "homepage": "https://github.com/LIVEauctioneers/angular-common#readme"
+}
