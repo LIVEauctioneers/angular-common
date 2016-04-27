@@ -3,6 +3,7 @@ var fs = require('fs');
 var path = require('path');
 var plugins = require('gulp-load-plugins')({pattern: '*'});
 var config = require('./build.config.js')();
+var clangFormatSettings = require('./clang-format.json'); // TODO: it wasn't reading.clang-format for some reason. confirm default file name
 
 gulp.task('clean', function(){
     return plugins.del([config.output]);
@@ -26,16 +27,20 @@ gulp.task('build', ['lint'], function(){
     return plugins.mergeStream(tasks, main);
 });
 
-// TODO: move lint config out
 gulp.task('lint', function(){
+
+});
+
+gulp.task('format', function(){
     return gulp.src(path.join(config.src, '/**/*.js'))
-        .pipe(plugins.clangFormat.format({BasedOnStyle: 'Google', IndentWidth: 8, UseTab: 'Always'}))
+        .pipe(plugins.clangFormat.format(clangFormatSettings))
         .on('warning', function(e) {
            process.stdout.write(e.message);
            process.exit(1);
         })
         .pipe(gulp.dest(config.src));
 });
+
 
 function getFolders(directory) {
     return  fs.readdirSync(directory)
