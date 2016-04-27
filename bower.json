@@ -1,0 +1,20 @@
+{
+  "name": "angular-common",
+  "description": "Common functionalities shared across angular projects.",
+  "main": "angular-common.js",
+  "authors": [],
+  "license": "ISC",
+  "homepage": "https://github.com/LIVEauctioneers/angular-common",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.5",
+    "ui-router": "1.0.0-alpha.1"
+  }
+}
