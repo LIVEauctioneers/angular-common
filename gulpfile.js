@@ -12,20 +12,29 @@ gulp.task('clean', function(){
     return plugins.del([config.output]);
 });
 
-gulp.task('build', function(){
+gulp.task('build', ['lint'], function(){
 
     // perform build for each module
     var src = config.src;
     var tasks = getFolders(src).map(function(directory){
         return gulp.src(path.join(src, directory, '/**/*.js'))
-            .pipe(plugins.eslint())
-            .pipe(plugins.eslint.format())
-            .pipe(plugins.eslint.failAfterError())
             .pipe(plugins.concat(directory + '.js'))
             .pipe(gulp.dest(config.output));
     });
 
-    return tasks;
+    // concat all into main.js
+    var main = gulp.src(path.join(src, '/**/*.js'))
+        .pipe(plugins.concat('main.js'))
+        .pipe(gulp.dest(config.output));
+
+    return plugins.mergeStream(tasks, main);
+});
+
+
+gulp.task('lint', function(){
+    return gulp.src(path.join(config.src, '/**/*.js'))
+        .pipe(plugins.jscs())
+        .pipe(plugins.jscs.reporter());
 });
 
 function getFolders(directory) {
