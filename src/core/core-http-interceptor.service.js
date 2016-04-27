@@ -11,14 +11,18 @@
 
         function onRequest(config) {
             // TODO
-            config.headers = config.headers || {};
             // for each registered api, append requestClient if available, append requestVersion if available
-            config.headers["X-Client"] = coreConfiguration
-            config.headers["X-Version"]
-                // let Cort know these names and confirm if we need changes
-            config.headers = angular.extend(config.headers, {
-                "X-Request-Client": "test"
-            });
+
+            for(var i = 0, l = coreConfiguration.apis.length; i < l; i++){
+                var api = coreConfiguration.apis[i];
+                if(config.url.indexOf(api.path) === 0) {
+                    config.headers = config.headers || {};
+                    config.headers["X-Client"] = api.requestClient;
+                    config.headers["X-Version"] = api.requestVersion;
+                    break;
+                }
+            }
+            
             return config;
         }
     }
