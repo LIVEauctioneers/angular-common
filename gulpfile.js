@@ -4,10 +4,6 @@ var path = require('path');
 var plugins = require('gulp-load-plugins')({pattern: '*'});
 var config = require('./build.config.js')();
 
-gulp.task('default', function(){
-    console.log(plugins);
-});
-
 gulp.task('clean', function(){
     return plugins.del([config.output]);
 });
@@ -24,17 +20,17 @@ gulp.task('build', ['lint'], function(){
 
     // concat all into main.js
     var main = gulp.src(path.join(src, '/**/*.js'))
-        .pipe(plugins.concat('main.js'))
+        .pipe(plugins.concat(config.main))
         .pipe(gulp.dest(config.output));
 
     return plugins.mergeStream(tasks, main);
 });
 
-
 gulp.task('lint', function(){
+    console.log(plugins.clangFormat);
     return gulp.src(path.join(config.src, '/**/*.js'))
-        .pipe(plugins.jscs())
-        .pipe(plugins.jscs.reporter());
+        .pipe(plugins.clangFormat.format())
+        .pipe(gulp.dest(config.src));
 });
 
 function getFolders(directory) {
