@@ -1,18 +1,12 @@
 (function() {
-    'use strict';
+  'use strict';
 
-    angular.module('laac.common.core').service('metadata', metadata);
+  angular.module('laac.common.core').service('metadata', metadata);
 
-    function metadata() {
-        var svc = {
-            page: {
-                title: '',
-                description: '',
-                canonical: ''
-            }
-        };
+  function metadata() {
+    var svc = {page: {title: '', description: '', canonical: ''}};
 
-        return svc;
-    }
+    return svc;
+  }
 
 })();
