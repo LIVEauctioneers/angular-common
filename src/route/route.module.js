@@ -1,6 +1,6 @@
 (function() {
-  'use strict';
+	'use strict';
 
-  angular.module('laac.common.route', ['ui.router']);
+	angular.module('laac.common.route', ['ui.router']);
 
 })();

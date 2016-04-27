@@ -1,8 +1,8 @@
 (function() {
-  'use strict';
+	'use strict';
 
-  angular.module('laac.common.route').config(config);
+	angular.module('laac.common.route').config(config);
 
-  function config($urlRouterProvider, $locationProvider) {}
+	function config($urlRouterProvider, $locationProvider) {}
 
 })();

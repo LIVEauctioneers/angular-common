@@ -1,6 +1,6 @@
 (function() {
-  'use strict';
+	'use strict';
 
-  angular.module('laac.common.core', []);
+	angular.module('laac.common.core', []);
 
 })();

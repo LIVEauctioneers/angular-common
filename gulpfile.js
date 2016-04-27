@@ -26,10 +26,14 @@ gulp.task('build', ['lint'], function(){
     return plugins.mergeStream(tasks, main);
 });
 
+// TODO: move lint config out
 gulp.task('lint', function(){
-    console.log(plugins.clangFormat);
     return gulp.src(path.join(config.src, '/**/*.js'))
-        .pipe(plugins.clangFormat.format())
+        .pipe(plugins.clangFormat.format({BasedOnStyle: 'Google', IndentWidth: 8, UseTab: 'Always'}))
+        .on('warning', function(e) {
+           process.stdout.write(e.message);
+           process.exit(1);
+        })
         .pipe(gulp.dest(config.src));
 });
 
