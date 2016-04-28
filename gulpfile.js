@@ -26,14 +26,16 @@ gulp.task('build', ['lint'], function(){
     var src = config.src;
     var tasks = getFolders(src).map(function(directory){
         return gulp.src(path.join(src, directory, JS_PATTERN))
-            .pipe(plugins.concat(directory + '.js'))
+            .pipe(plugins.ngAnnotate())
+            .pipe(plugins.concat(pkg.name + '-' + directory + '.js'))
             .pipe(plugins.header(banner, {pkg: pkg}))
             .pipe(gulp.dest(config.output));
     });
 
     // concat all into main.js
-    var main = gulp.src(path.join(src, '/**/*.js'))
-        .pipe(plugins.concat(config.main))
+    var main = gulp.src(path.join(src, JS_PATTERN))
+        .pipe(plugins.ngAnnotate())
+        .pipe(plugins.concat(pkg.main))
         .pipe(plugins.header(banner, {pkg: pkg}))
         .pipe(gulp.dest(config.output));
 
