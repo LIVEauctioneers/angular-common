@@ -1,29 +1,40 @@
+var pkg = require('./package.json');
 var gulp = require('gulp');
 var fs = require('fs');
 var path = require('path');
-var plugins = require('gulp-load-plugins')({pattern: ['gulp-*', 'gulp.*', 'del']});
+var plugins = require('gulp-load-plugins')({pattern: ['gulp-*', 'gulp.*', 'del', 'merge-stream']});
 var config = require('./build.config.js')();
 var clangFormatSettings = require('./clang-format.json'); // TODO: it wasn't reading.clang-format for some reason. confirm default file name
 
+
 var JS_PATTERN = '/**/*.js';
+var banner = ['/**',
+  ' * <%= pkg.name %> - <%= pkg.description %>',
+  ' * @version v<%= pkg.version %>',
+  ' * @link <%= pkg.homepage %>',
+  ' */',
+  ''].join('\n');
+
+
 
 gulp.task('clean', function(){
     return plugins.del([config.output]);
 });
 
 gulp.task('build', ['lint'], function(){
-
     // perform build for each module
     var src = config.src;
     var tasks = getFolders(src).map(function(directory){
         return gulp.src(path.join(src, directory, JS_PATTERN))
             .pipe(plugins.concat(directory + '.js'))
+            .pipe(plugins.header(banner, {pkg: pkg}))
             .pipe(gulp.dest(config.output));
     });
 
     // concat all into main.js
     var main = gulp.src(path.join(src, '/**/*.js'))
         .pipe(plugins.concat(config.main))
+        .pipe(plugins.header(banner, {pkg: pkg}))
         .pipe(gulp.dest(config.output));
 
     return plugins.mergeStream(tasks, main);
