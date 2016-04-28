@@ -25,7 +25,7 @@
 		}
 
 		function encode(parameterType, object) {
-			// TODO
+			return types[parameterType].encode(object);
 		}
 
 		function getTypes() { return types; }

@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var fs = require('fs');
 var path = require('path');
-var plugins = require('gulp-load-plugins')({pattern: '*'});
+var plugins = require('gulp-load-plugins')({pattern: ['gulp-*', 'gulp.*', 'del']});
 var config = require('./build.config.js')();
 var clangFormatSettings = require('./clang-format.json'); // TODO: it wasn't reading.clang-format for some reason. confirm default file name
 
@@ -31,6 +31,8 @@ gulp.task('build', ['lint'], function(){
 
 gulp.task('lint', function(){
     return gulp.src(path.join(config.src, JS_PATTERN))
+        .pipe(plugins.jshint('.jshintrc'))
+        .pipe(plugins.jshint.reporter('default'))
         .pipe(plugins.clangFormat.checkFormat(clangFormatSettings, undefined, {verbose: true, fail: true}));
 });
 

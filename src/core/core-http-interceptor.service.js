@@ -19,9 +19,9 @@
 				var api = coreConfiguration.apis[i];
 				if (config.url.indexOf(api.path) === 0) {
 					config.headers = config.headers || {};
-					config.headers["X-Client"] =
+					config.headers['X-Client'] =
 					    api.requestClient;
-					config.headers["X-Version"] =
+					config.headers['X-Version'] =
 					    api.requestVersion;
 					break;
 				}
