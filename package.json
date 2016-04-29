@@ -1,6 +1,6 @@
 {
   "name": "angular-common",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Common functionalities shared across angular projects.",
   "main": "angular-common.js",
   "scripts": {

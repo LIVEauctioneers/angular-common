@@ -4,7 +4,7 @@ var fs = require('fs');
 var path = require('path');
 var plugins = require('gulp-load-plugins')({pattern: ['gulp-*', 'gulp.*', 'del', 'merge-stream']});
 var config = require('./build.config.js')();
-var clangFormatSettings = require('./clang-format.json'); // TODO: it wasn't reading.clang-format for some reason. confirm default file name
+var clangFormatSettings = require('./.clang-format.json'); // TODO: it wasn't reading .clang-format for some reason. confirm default file name
 
 
 var JS_PATTERN = '/**/*.js';
