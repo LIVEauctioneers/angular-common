@@ -8,6 +8,7 @@ var clangFormatSettings = require('./.clang-format.json'); // TODO: it wasn't re
 
 
 var JS_PATTERN = '/**/*.js';
+var JS_ANGULAR_PATTERNS = ['/**/*.module.js', '/**/*.js'];
 var banner = ['/**',
   ' * <%= pkg.name %> - <%= pkg.description %>',
   ' * @version v<%= pkg.version %>',
@@ -25,7 +26,7 @@ gulp.task('build', ['lint'], function(){
     // perform build for each module
     var src = config.src;
     var tasks = getFolders(src).map(function(directory){
-        return gulp.src(path.join(src, directory, JS_PATTERN))
+        return gulp.src([path.join(src, directory, '/**/*.module.js'), path.join(src, directory, JS_PATTERN)])
             .pipe(plugins.ngAnnotate())
             .pipe(plugins.concat(pkg.name + '-' + directory + '.js'))
             .pipe(plugins.header(banner, {pkg: pkg}))
@@ -33,7 +34,7 @@ gulp.task('build', ['lint'], function(){
     });
 
     // concat all into main.js
-    var main = gulp.src(path.join(src, JS_PATTERN))
+    var main = gulp.src([path.join(src, '/**/*.module.js'), path.join(src, JS_PATTERN)])
         .pipe(plugins.ngAnnotate())
         .pipe(plugins.concat(pkg.main))
         .pipe(plugins.header(banner, {pkg: pkg}))

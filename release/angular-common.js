@@ -1,8 +1,22 @@
 /**
  * angular-common - Common functionalities shared across angular projects.
- * @version v1.0.1
+ * @version v1.0.2
  * @link https://github.com/LIVEauctioneers/angular-common#readme
  */
+(function() {
+	'use strict';
+
+	angular.module('laac.common.core', []);
+
+})();
+
+(function() {
+	'use strict';
+
+	angular.module('laac.common.route', ['ui.router']);
+
+})();
+
 (function() {
 	'use strict';
 
@@ -74,13 +88,6 @@
 (function() {
 	'use strict';
 
-	angular.module('laac.common.core', []);
-
-})();
-
-(function() {
-	'use strict';
-
 	angular.module('laac.common.core').service('metadata', metadata);
 
 	function metadata() {
@@ -88,13 +95,6 @@
 
 		return svc;
 	}
-
-})();
-
-(function() {
-	'use strict';
-
-	angular.module('laac.common.route', ['ui.router']);
 
 })();
 

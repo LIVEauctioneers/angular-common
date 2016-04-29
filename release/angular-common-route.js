@@ -1,6 +1,6 @@
 /**
  * angular-common - Common functionalities shared across angular projects.
- * @version v1.0.1
+ * @version v1.0.2
  * @link https://github.com/LIVEauctioneers/angular-common#readme
  */
 (function() {
