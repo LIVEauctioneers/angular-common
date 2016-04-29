@@ -11,8 +11,6 @@
 		provider.getTypes = getTypes;
 		provider.$get = $get;
 
-
-		var svc = {};
 		var types = {};
 		////////////////////////////////////
 

@@ -59,6 +59,10 @@ gulp.task('format', function(){
         .pipe(gulp.dest(config.src));
 });
 
+gulp.task('release', ['clean', 'build'], function(){
+    return gulp.src(path.join(config.output, JS_PATTERN))
+        .pipe(gulp.dest(config.release));
+})
 
 function getFolders(directory) {
     return  fs.readdirSync(directory)
