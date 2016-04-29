@@ -5,9 +5,10 @@
 	    .provider('coreConfiguration', coreConfiguration);
 
 	function coreConfiguration() {
-		var provider = {registerAPI: registerAPI, $get: $get};
 		/*jshint validthis: true */
-		angular.extend(this, provider);
+		var provider = this;
+		provider.registerAPI = registerAPI;
+		provider.$get = $get;
 
 		///////////////////////////////////
 		var apis = {};
@@ -22,10 +23,10 @@
 			}*/
 		}
 
-		function $get() {
-			var svc = {apis: apis};
-			return svc;
-		}
+		/*@ngInject*/
+		function $get() { return new CoreConfiguration(); }
+
+		function CoreConfiguration() { return {apis: apis}; }
 	}
 
 })();

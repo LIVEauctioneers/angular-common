@@ -7,9 +7,10 @@
 	function uiRouterHelper($urlRouterProvider, $locationProvider,
 				$urlMatcherFactoryProvider,
 				urlParameterTypeProvider) {
-		var provider = {config: config, $get: $get};
 		/*jshint validthis: true */
-		angular.extend(this, provider);
+		var provider = this;
+		provider.config = config;
+		provider.$get = $get;
 
 		// performs common configurations
 		function config() {
@@ -24,8 +25,10 @@
 					});
 		}
 
-		// TODO: annotate for ngInject
-		function $get() { return {}; }
+		/*@ngInject*/
+		function $get() { return new UIRouterHelper(); }
+
+		function UIRouterHelper() {}
 	}
 
 })();

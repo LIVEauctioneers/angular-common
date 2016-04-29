@@ -5,20 +5,24 @@
 	    .provider('urlParameterType', urlParameterType);
 
 	function urlParameterType() {
-		var provider = {
-			register: registerUrlParameterType,
-			getTypes: getTypes,
-			$get: $get
-		};
 		/*jshint validthis: true */
-		angular.extend(this, provider);
+		var provider = this;
+		provider.register = registerUrlParameterType;
+		provider.getTypes = getTypes;
+		provider.$get = $get;
 
-		var svc = {getTypes: getTypes, encode: encode};
+
+		var svc = {};
+		var types = {};
 		////////////////////////////////////
 
-		var types = {};
-		// TODO: annotate for ngInject
-		function $get() { return svc; }
+
+		/*@ngInject*/
+		function $get() { return new UrlParameterType(); }
+
+		function UrlParameterType() {
+			return {getTypes: getTypes, encode: encode};
+		}
 
 		function registerUrlParameterType(name, parameterDefinition) {
 			types[name] = parameterDefinition;
