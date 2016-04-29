@@ -101,13 +101,12 @@
 (function() {
 	'use strict';
 
-	uiRouterHelper.$inject = ["$urlRouterProvider", "$locationProvider", "$urlMatcherFactoryProvider", "urlParameterTypeProvider"];
+	uiRouterHelper.$inject = ["$urlRouterProvider", "$locationProvider", "$urlMatcherFactoryProvider"];
 	angular.module('laac.common.route')
 	    .provider('uiRouterHelper', uiRouterHelper);
 
 	function uiRouterHelper($urlRouterProvider, $locationProvider,
-				$urlMatcherFactoryProvider,
-				urlParameterTypeProvider) {
+				$urlMatcherFactoryProvider) {
 		/*jshint validthis: true */
 		var provider = this;
 		provider.config = config;
@@ -119,11 +118,6 @@
 			$locationProvider.html5Mode(true).hashPrefix('!');
 			$urlMatcherFactoryProvider.caseInsensitive(true);
 			$urlMatcherFactoryProvider.strictMode(false);
-			angular.forEach(urlParameterTypeProvider.getTypes(),
-					function(value, key) {
-						$urlMatcherFactoryProvider.type(
-						    key, value);
-					});
 		}
 
 		/*@ngInject*/
@@ -137,12 +131,14 @@
 (function() {
 	'use strict';
 
+	urlParameterType.$inject = ["$urlMatcherFactoryProvider"];
 	angular.module('laac.common.route')
 	    .provider('urlParameterType', urlParameterType);
 
-	function urlParameterType() {
+	function urlParameterType($urlMatcherFactoryProvider) {
 		/*jshint validthis: true */
 		var provider = this;
+		provider.initialize = initialize;
 		provider.register = registerUrlParameterType;
 		provider.getTypes = getTypes;
 		provider.$get = $get;
@@ -150,6 +146,11 @@
 		var types = {};
 		////////////////////////////////////
 
+		function initialize() {
+			angular.forEach(getTypes(), function(value, key) {
+				$urlMatcherFactoryProvider.type(key, value);
+			});
+		}
 
 		/*@ngInject*/
 		function $get() { return new UrlParameterType(); }

@@ -5,8 +5,7 @@
 	    .provider('uiRouterHelper', uiRouterHelper);
 
 	function uiRouterHelper($urlRouterProvider, $locationProvider,
-				$urlMatcherFactoryProvider,
-				urlParameterTypeProvider) {
+				$urlMatcherFactoryProvider) {
 		/*jshint validthis: true */
 		var provider = this;
 		provider.config = config;
@@ -18,11 +17,6 @@
 			$locationProvider.html5Mode(true).hashPrefix('!');
 			$urlMatcherFactoryProvider.caseInsensitive(true);
 			$urlMatcherFactoryProvider.strictMode(false);
-			angular.forEach(urlParameterTypeProvider.getTypes(),
-					function(value, key) {
-						$urlMatcherFactoryProvider.type(
-						    key, value);
-					});
 		}
 
 		/*@ngInject*/
