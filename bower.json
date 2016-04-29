@@ -1,7 +1,7 @@
 {
   "name": "angular-common",
   "description": "Common functionalities shared across angular projects.",
-  "main": "angular-common.js",
+  "main": "release/angular-common.js",
   "authors": [],
   "license": "ISC",
   "homepage": "https://github.com/LIVEauctioneers/angular-common",
@@ -13,7 +13,8 @@
     "test",
     "tests",
     "src",
-    "./*.js"
+    "build.config.js",
+    "gulpfile.js"
   ],
   "dependencies": {
     "angular": "^1.5.5",
