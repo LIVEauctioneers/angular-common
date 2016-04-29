@@ -13,7 +13,7 @@
     "test",
     "tests",
     "src",
-    "*.js"
+    "./*.js"
   ],
   "dependencies": {
     "angular": "^1.5.5",
